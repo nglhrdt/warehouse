@@ -1,0 +1,244 @@
+openapi: 3.0.0
+info:
+  title: Warehouse Management API
+  version: 1.0.0
+paths:
+  /products:
+    get:
+      operationId: getProducts
+      summary: List all products
+      responses:
+        "200":
+          description: A list of products
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Product"
+    post:
+      operationId: createProduct
+      summary: Create a new product
+      responses:
+        "201":
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Product"
+  /products/{id}:
+    get:
+      operationId: getProductById
+      summary: Get a product by ID
+      responses:
+        "200":
+          description: A single product
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Product"
+    put:
+      operationId: updateProductById
+      summary: Update a product by ID
+      responses:
+        "200":
+          description: Updated
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Product"
+    delete:
+      operationId: deleteProductById
+      summary: Delete a product by ID
+      responses:
+        "204":
+          description: Deleted
+  /warehouses:
+    get:
+      operationId: getWarehouses
+      summary: List all warehouses
+      responses:
+        "200":
+          description: A list of warehouses
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Warehouse"
+    post:
+      operationId: createWarehouse
+      summary: Create a new warehouse
+      responses:
+        "201":
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Warehouse"
+  /warehouses/{id}:
+    get:
+      operationId: getWarehouseById
+      summary: Get a warehouse by ID
+      responses:
+        "200":
+          description: A single warehouse
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Warehouse"
+    put:
+      operationId: updateWarehouseById
+      summary: Update a warehouse by ID
+      responses:
+        "200":
+          description: Updated
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Warehouse"
+    delete:
+      operationId: deleteWarehouseById
+      summary: Delete a warehouse by ID
+      responses:
+        "204":
+          description: Deleted
+  /inventories:
+    get:
+      operationId: getInventories
+      summary: List all inventories
+      responses:
+        "200":
+          description: A list of inventories
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Inventory"
+    post:
+      operationId: createInventory
+      summary: Create a new inventory
+      responses:
+        "201":
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Inventory"
+  /inventories/{id}:
+    get:
+      operationId: getInventoryById
+      summary: Get an inventory by ID
+      responses:
+        "200":
+          description: A single inventory
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Inventory"
+    put:
+      operationId: updateInventoryById
+      summary: Update an inventory by ID
+      responses:
+        "200":
+          description: Updated
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Inventory"
+    delete:
+      operationId: deleteInventoryById
+      summary: Delete an inventory by ID
+      responses:
+        "204":
+          description: Deleted
+  /suppliers:
+    get:
+      operationId: getSuppliers
+      summary: List all suppliers
+      responses:
+        "200":
+          description: A list of suppliers
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Supplier"
+    post:
+      operationId: createSupplier
+      summary: Create a new supplier
+      responses:
+        "201":
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Supplier"
+  /suppliers/{id}:
+    get:
+      operationId: getSupplierById
+      summary: Get a supplier by ID
+      responses:
+        "200":
+          description: A single supplier
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Supplier"
+    put:
+      operationId: updateSupplierById
+      summary: Update a supplier by ID
+      responses:
+        "200":
+          description: Updated
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Supplier"
+    delete:
+      operationId: deleteSupplierById
+      summary: Delete a supplier by ID
+      responses:
+        "204":
+          description: Deleted
+components:
+  schemas:
+    Product:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        description:
+          type: string
+        price:
+          type: number
+          format: float
+    Warehouse:
+      type: object
+      properties:
+        id:
+          type: integer
+        location:
+          type: string
+    Inventory:
+      type: object
+      properties:
+        product_id:
+          type: integer
+        warehouse_id:
+          type: integer
+        quantity:
+          type: integer
+    Supplier:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        contact_info:
+          type: string
