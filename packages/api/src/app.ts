@@ -26,9 +26,10 @@ app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
 });
 
 // Database connection
-mongoose.connect(process.env.MONGO_URI as string)
+mongoose
+  .connect(process.env.MONGO_URI || 'mongodb://db:27017/warehouse')
   .then(() => console.log('MongoDB connected'))
-  .catch(err => console.error('MongoDB connection error:', err));
+  .catch((err) => console.error('MongoDB connection error:', err));
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {

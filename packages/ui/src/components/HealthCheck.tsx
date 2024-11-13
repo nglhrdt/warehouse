@@ -1,18 +1,10 @@
-import { useEffect, useState } from "react";
-
-
+import { useQuery } from '@tanstack/react-query';
+import { queries } from '../queries';
 
 const HealthCheck = () => {
-  useEffect(() => {
-    
-  }, []);
+  const {data} = useQuery(queries.health.check)
 
-  const [state, setState] = useState<HealthCheckResponse>({
-    message: "unknown",
-    timestamp: "",
-  });
-
-  return <div>Health state: {state.message}</div>;
+  return <div>Health state: {data?.message}</div>;
 };
 
 export default HealthCheck;
