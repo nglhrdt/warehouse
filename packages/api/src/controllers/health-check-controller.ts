@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { HealthCheckResponse, HealthState } from '../../../shared/lib/interfaces';
+import { HealthCheckResponse, HealthState } from '../types/types';
 
 function healthCheck() {
     return (req: Request, res: Response) => {
