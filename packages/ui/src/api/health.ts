@@ -1,9 +1,6 @@
-export type HealthCheckResponse = {
-    timestamp: string;
-    message: string;
-};
+// import { HealthCheckResponse } from "../../../shared/lib/interfaces";
 
-const healtCheck = (): Promise<HealthCheckResponse> =>
+const healtCheck = (): Promise =>
     fetch("http://localhost:5000/api/v1/health")
         .then((res) => res.json());
 
