@@ -1,7 +1,9 @@
-import health from "./health";
+import health from './health';
+import products from './products';
 
 const api = {
-    ...health
+  ...health,
+  ...products,
 };
 
 export default api;
