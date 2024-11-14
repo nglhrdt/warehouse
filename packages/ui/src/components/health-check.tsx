@@ -4,7 +4,7 @@ import { LuWifi, LuWifiOff } from 'react-icons/lu';
 import { queries } from '../queries';
 
 const HealthCheck = () => {
-  const { data } = useQuery(queries.health.check);
+  const { data } = useQuery({ ...queries.health.check, refetchInterval: 15000 });
 
   return <span title={data?.state ?? ''}>{data?.state === 'UP' ? <LuWifi /> : <LuWifiOff />}</span>;
 };
