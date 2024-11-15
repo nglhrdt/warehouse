@@ -1,13 +1,19 @@
 import api from '@/api';
 import { useForm } from '@tanstack/react-form';
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { CreateProductDTO } from 'api';
 import { FC } from 'react';
 
 const CreateProductForm: FC = () => {
+  const queryClient = useQueryClient();
+
   const createProductMutation = useMutation({
     mutationFn: async (value: CreateProductDTO) => {
       return api.createProduct(value);
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['products'] });
+      form.reset();
     },
   });
 
