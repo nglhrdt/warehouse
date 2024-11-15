@@ -27,14 +27,16 @@ const CreateProductForm: FC = () => {
   });
 
   return (
-    <div>
-      <h1>Create Product</h1>
+    <div className="border border-slate-800 rounded">
+      <h1 className="m-4 font-bold text-lg">Create Product</h1>
+      <div className="border-b border-slate-800"></div>
       <form
         onSubmit={(e) => {
           e.preventDefault();
           e.stopPropagation();
           form.handleSubmit();
         }}
+        className="p-4 flex flex-col gap-4"
       >
         <div>
           {/* A type-safe field component*/}
@@ -51,16 +53,17 @@ const CreateProductForm: FC = () => {
             children={(field) => {
               // Avoid hasty abstractions. Render props are great!
               return (
-                <>
+                <div className='flex gap-4 items-center'>
                   <label htmlFor={field.name}>Productname:</label>
                   <input
+                    className="border border-slate-800 rounded grow"
                     id={field.name}
                     name={field.name}
                     value={field.state.value}
                     onBlur={field.handleBlur}
                     onChange={(e) => field.handleChange(e.target.value)}
                   />
-                </>
+                </div>
               );
             }}
           />
@@ -68,20 +71,22 @@ const CreateProductForm: FC = () => {
         <form.Subscribe
           selector={(state) => [state.canSubmit, state.isSubmitting]}
           children={([canSubmit, isSubmitting]) => (
-            <>
+            <div className="flex gap-4 justify-end">
               <button
+                className="py-1 px-2 bg-slate-800 text-white rounded"
                 type="submit"
                 disabled={!canSubmit}
               >
                 {isSubmitting ? '...' : 'Submit'}
               </button>
               <button
+                className="py-1 px-2 bg-slate-800 text-white rounded"
                 type="reset"
                 onClick={() => form.reset()}
               >
                 Reset
               </button>
-            </>
+            </div>
           )}
         />
       </form>

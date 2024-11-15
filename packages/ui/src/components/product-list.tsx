@@ -6,13 +6,14 @@ const ProductList: FC = () => {
   const { data: products } = useQuery(queries.products.list);
 
   return (
-    <div>
-      <h2>Product List</h2>
-      <ul>
+    <div className='border border-slate-800 rounded'>
+      <h2 className='text-lg font-bold m-4'>Product List</h2>
+      <div className='border-b border-slate-800'></div>
+      <div className='flex flex-col gap-4 p-4'>
         {products?.map((product) => (
-          <li key={product.id}>{product.name}</li>
+          <div className="p-4 border border-slate-800 rounded" key={product.id}>{product.name}</div>
         ))}
-      </ul>
+      </div>
     </div>
   );
 };
