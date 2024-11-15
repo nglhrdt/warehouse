@@ -9,7 +9,7 @@ const Layout: FC<LayoutProps> = ({ children }) => {
   return (
     <div className="flex flex-col">
       <Header />
-      <main>{children}</main>
+      <main className='flex flex-col gap-4 p-4'>{children}</main>
     </div>
   );
 };
