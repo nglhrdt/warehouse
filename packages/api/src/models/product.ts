@@ -1,6 +1,7 @@
 import mongoose, { Document, Schema } from 'mongoose';
 
 interface Product extends Document {
+  _id: mongoose.Types.ObjectId;
   name: string;
 }
 

@@ -10,7 +10,7 @@ const ProductList: FC = () => {
       <h2>Product List</h2>
       <ul>
         {products?.map((product) => (
-          <li key={product._id}>{product.name}</li>
+          <li key={product.id}>{product.name}</li>
         ))}
       </ul>
     </div>

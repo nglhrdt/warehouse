@@ -1,10 +1,10 @@
-import { CreateProduct, Product } from '@/types/types';
+import { CreateProductDTO, ProductDTO } from 'api';
 
-const getAllProducts = (): Promise<Product[]> => {
+const getAllProducts = (): Promise<ProductDTO[]> => {
   return fetch('http://localhost:5000/api/v1/products').then((res) => res.json());
 }
 
-const createProduct = (product: CreateProduct): Promise<string> => {
+const createProduct = (product: CreateProductDTO): Promise<string> => {
   return fetch('http://localhost:5000/api/v1/products', {
     method: 'POST',
     headers: {

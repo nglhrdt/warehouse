@@ -1,17 +1,17 @@
 import api from '@/api';
 import { useForm } from '@tanstack/react-form';
 import { useMutation } from '@tanstack/react-query';
+import { CreateProductDTO } from 'api';
 import { FC } from 'react';
-import { CreateProduct } from '@/types/types';
 
 const CreateProductForm: FC = () => {
   const createProductMutation = useMutation({
-    mutationFn: async (value: CreateProduct) => {
+    mutationFn: async (value: CreateProductDTO) => {
       return api.createProduct(value);
     },
   });
 
-  const form = useForm<CreateProduct>({
+  const form = useForm<CreateProductDTO>({
     defaultValues: {
       name: '',
     },
@@ -35,10 +35,7 @@ const CreateProductForm: FC = () => {
           <form.Field
             name="name"
             validators={{
-              onChange: ({ value }) =>
-                !value
-                  ? 'A Name is required'
-                  : undefined,
+              onChange: ({ value }) => (!value ? 'A Name is required' : undefined),
               onChangeAsyncDebounceMs: 500,
               onChangeAsync: async ({ value }) => {
                 await new Promise((resolve) => setTimeout(resolve, 1000));
