@@ -16,9 +16,9 @@ function getAll() {
 
 function create() {
   return (req: Request, res: Response) => {
-    const { name } = req.body;
+    const { name, url } = req.body;
 
-    const product = new Product({ name });
+    const product = new Product({ name, url });
 
     product
       .save()
@@ -30,4 +30,19 @@ function create() {
       });
   };
 }
-export default { create, getAll };
+
+function deleteProduct() {
+  return (req: Request, res: Response) => {
+    const { id } = req.params;
+
+    Product.findByIdAndDelete(id)
+      .then(() => {
+        res.status(200).json({ message: 'Product deleted successfully' });
+      })
+      .catch((error) => {
+        res.status(500).json({ error: 'Failed to delete product' });
+      });
+  };
+}
+
+export default { create, getAll, deleteProduct };
