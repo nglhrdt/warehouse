@@ -20,6 +20,7 @@ const CreateProductForm: FC = () => {
   const form = useForm<CreateProductDTO>({
     defaultValues: {
       name: '',
+      url: '',
     },
     onSubmit: async ({ value }) => {
       await createProductMutation.mutateAsync(value);
@@ -27,43 +28,50 @@ const CreateProductForm: FC = () => {
   });
 
   return (
-    <div className="border border-slate-800 rounded">
-      <h1 className="m-4 font-bold text-lg">Create Product</h1>
-      <div className="border-b border-slate-800"></div>
+    <div className="border border-slate-800 rounded p-4">
+      <h1 className="font-bold text-lg">Create Product</h1>
       <form
         onSubmit={(e) => {
           e.preventDefault();
           e.stopPropagation();
           form.handleSubmit();
         }}
-        className="p-4 flex flex-col gap-4"
+        className="flex flex-col gap-4"
       >
-        <div>
-          {/* A type-safe field component*/}
+        <div className='grid grid-cols-[auto_1fr]'>
           <form.Field
             name="name"
-            validators={{
-              onChange: ({ value }) => (!value ? 'A Name is required' : undefined),
-              onChangeAsyncDebounceMs: 500,
-              onChangeAsync: async ({ value }) => {
-                await new Promise((resolve) => setTimeout(resolve, 1000));
-                return value.includes('error') && 'No "error" allowed in name';
-              },
-            }}
             children={(field) => {
-              // Avoid hasty abstractions. Render props are great!
               return (
-                <div className='flex gap-4 items-center'>
-                  <label htmlFor={field.name}>Productname:</label>
+                <>
+                  <label htmlFor={field.name} className='whitespace-nowrap'>Product name:</label>
                   <input
-                    className="border border-slate-800 rounded grow"
+                    className="border border-slate-800 rounded"
                     id={field.name}
                     name={field.name}
                     value={field.state.value}
                     onBlur={field.handleBlur}
                     onChange={(e) => field.handleChange(e.target.value)}
                   />
-                </div>
+                </>
+              );
+            }}
+          />
+          <form.Field
+            name="url"
+            children={(field) => {
+              return (
+                <>
+                  <label htmlFor={field.name}>Product url:</label>
+                  <input
+                    className="border border-slate-800 rounded"
+                    id={field.name}
+                    name={field.name}
+                    value={field.state.value}
+                    onBlur={field.handleBlur}
+                    onChange={(e) => field.handleChange(e.target.value)}
+                  />
+                </>
               );
             }}
           />

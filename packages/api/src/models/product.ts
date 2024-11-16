@@ -3,10 +3,12 @@ import mongoose, { Document, Schema } from 'mongoose';
 interface Product extends Document {
   _id: mongoose.Types.ObjectId;
   name: string;
+  url: string;
 }
 
 const ProductSchema: Schema = new Schema({
   name: { type: String, required: true },
+  url: { type: String, required: false },
 });
 
 const Product = mongoose.model<Product>('Product', ProductSchema);

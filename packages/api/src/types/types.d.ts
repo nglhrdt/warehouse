@@ -6,10 +6,12 @@ declare module 'api' {
 
   export type CreateProductDTO = {
     name: string;
+    url?: string;
   };
 
   export type ProductDTO = {
     id: string;
     name: string;
+    url?: string;
   };
 }

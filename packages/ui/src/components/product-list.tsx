@@ -7,8 +7,7 @@ const ProductList: FC = () => {
 
   return (
     <div className='border border-slate-800 rounded'>
-      <h2 className='text-lg font-bold m-4'>Product List</h2>
-      <div className='border-b border-slate-800'></div>
+      <h2 className='text-lg font-bold mx-4 mt-4'>Product List</h2>
       <div className='flex flex-col gap-4 p-4'>
         {products?.map((product) => (
           <div className="p-4 border border-slate-800 rounded" key={product.id}>{product.name}</div>

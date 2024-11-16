@@ -1,11 +1,12 @@
-import { ProductDTO } from "api";
-import Product from "../models/product";
+import { ProductDTO } from 'api';
+import Product from '../models/product';
 
 function mapProduct(product: Product): ProductDTO {
-    return {
-        id: product._id.toString(),
-        name: product.name
-    };
+  return {
+    id: product._id.toString(),
+    name: product.name,
+    url: product.url,
+  };
 }
 
 export default mapProduct;
