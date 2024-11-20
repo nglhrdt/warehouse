@@ -8,7 +8,7 @@ interface Product extends Document {
 
 const ProductSchema: Schema = new Schema({
   name: { type: String, required: true },
-  url: { type: String, required: false },
+  url: String,
 });
 
 const Product = mongoose.model<Product>('Product', ProductSchema);

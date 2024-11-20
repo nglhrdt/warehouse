@@ -14,4 +14,17 @@ declare module 'api' {
     name: string;
     url?: string;
   };
+
+  export type CreateOrganizerDTO = {
+    columns: number;
+    rows: number;
+    name: string;
+  };
+
+  export type OrganizerDTO = {
+    id: string;
+    columns: number;
+    rows: number;
+    name: string;
+  };
 }
