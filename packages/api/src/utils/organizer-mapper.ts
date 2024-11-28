@@ -1,11 +1,13 @@
 import { OrganizerDTO } from 'api';
+import Organizer from '../models/organizer';
 
-function mapOrganizer(organizer: Organizer): OrganizerDTO {
+function toDTO(organizer: Organizer): OrganizerDTO {
     return {
         id: organizer._id.toString(),
         name: organizer.name,
-        email: organizer.email,
+        columns: organizer.columns,
+        rows: organizer.rows,
     };
 }
 
-export default mapOrganizer;
+export default toDTO;

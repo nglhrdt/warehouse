@@ -1,9 +1,11 @@
 import health from './health';
-import products from './products';
+import organizer from './organizer';
+import product from './product';
 
 const api = {
   ...health,
-  ...products,
+  ...organizer,
+  ...product,
 };
 
 export default api;

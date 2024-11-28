@@ -2,8 +2,7 @@ import api from '@/api';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { ProductDTO } from 'api';
 import React from 'react';
-import { LuTrash } from 'react-icons/lu';
-import { LuExternalLink } from "react-icons/lu";
+import { LuExternalLink, LuTrash } from 'react-icons/lu';
 
 interface ProductListItemProps {
   product: ProductDTO;
@@ -14,7 +13,7 @@ const ProductListItem: React.FC<ProductListItemProps> = ({ product }) => {
   const queryClient = useQueryClient();
 
   function deleteProduct(): void {
-    deleteMutation.mutateAsync().then(() => queryClient.invalidateQueries({ queryKey: ['products'] }));
+    deleteMutation.mutateAsync().then(() => queryClient.invalidateQueries({ queryKey: ['product'] }));
   }
 
   return (
@@ -29,9 +28,9 @@ const ProductListItem: React.FC<ProductListItemProps> = ({ product }) => {
       <a
         href={product.url}
         target="_blank"
-        className='flex items-center'
+        className="flex items-center"
       >
-        <LuExternalLink/>
+        <LuExternalLink />
         <span className="italic">Product url</span>
       </a>
     </div>

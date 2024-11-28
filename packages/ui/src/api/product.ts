@@ -1,11 +1,14 @@
 import { CreateProductDTO, ProductDTO } from 'api';
 
+const baseUrl = 'http://localhost:5000/api/v1';
+const productsUrl = `${baseUrl}/product`;
+
 const getAllProducts = (): Promise<ProductDTO[]> => {
-  return fetch('http://localhost:5000/api/v1/products').then((res) => res.json());
+  return fetch(productsUrl).then((res) => res.json());
 };
 
 const createProduct = (product: CreateProductDTO): Promise<string> => {
-  return fetch('http://localhost:5000/api/v1/products', {
+  return fetch(productsUrl, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -15,7 +18,7 @@ const createProduct = (product: CreateProductDTO): Promise<string> => {
 };
 
 const deleteProduct = (id: string): Promise<void> => {
-  return fetch(`http://localhost:5000/api/v1/products/${id}`, {
+  return fetch(`${productsUrl}/${id}`, {
     method: 'DELETE',
   }).then((res) => res.json());
 };

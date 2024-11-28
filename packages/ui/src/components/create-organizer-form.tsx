@@ -1,35 +1,36 @@
 import api from '@/api';
 import { useForm } from '@tanstack/react-form';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { CreateProductDTO } from 'api';
+import { CreateOrganizerDTO } from 'api';
 import { FC } from 'react';
 
-const CreateProductForm: FC = () => {
+const CreateOrganizerForm: FC = () => {
   const queryClient = useQueryClient();
 
-  const createProductMutation = useMutation({
-    mutationFn: async (value: CreateProductDTO) => {
-      return api.createProduct(value);
+  const createOrganizerMutation = useMutation({
+    mutationFn: async (value: CreateOrganizerDTO) => {
+      return api.createOrganizer(value);
     },
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['product'] });
+      queryClient.invalidateQueries({ queryKey: ['organizer'] });
       form.reset();
     },
   });
 
-  const form = useForm<CreateProductDTO>({
+  const form = useForm<CreateOrganizerDTO>({
     defaultValues: {
       name: '',
-      url: '',
+      columns: 0,
+      rows: 0,
     },
     onSubmit: async ({ value }) => {
-      await createProductMutation.mutateAsync(value);
+      await createOrganizerMutation.mutateAsync(value);
     },
   });
 
   return (
     <div className="border border-slate-800 rounded p-4">
-      <h1 className="font-bold text-lg">Create Product</h1>
+      <h1 className="font-bold text-lg">Create Organizer</h1>
       <form
         onSubmit={(e) => {
           e.preventDefault();
@@ -38,13 +39,18 @@ const CreateProductForm: FC = () => {
         }}
         className="flex flex-col gap-4"
       >
-        <div className='grid grid-cols-[auto_1fr]'>
+        <div className="grid grid-cols-[auto_1fr]">
           <form.Field
             name="name"
             children={(field) => {
               return (
                 <>
-                  <label htmlFor={field.name} className='whitespace-nowrap'>Product name:</label>
+                  <label
+                    htmlFor={field.name}
+                    className="whitespace-nowrap"
+                  >
+                    Organizer name:
+                  </label>
                   <input
                     className="border border-slate-800 rounded"
                     id={field.name}
@@ -58,18 +64,36 @@ const CreateProductForm: FC = () => {
             }}
           />
           <form.Field
-            name="url"
+            name="columns"
             children={(field) => {
               return (
                 <>
-                  <label htmlFor={field.name}>Product url:</label>
+                  <label htmlFor={field.name}>Columns:</label>
                   <input
                     className="border border-slate-800 rounded"
                     id={field.name}
                     name={field.name}
                     value={field.state.value}
                     onBlur={field.handleBlur}
-                    onChange={(e) => field.handleChange(e.target.value)}
+                    onChange={(e) => field.handleChange(e.target.value ? parseInt(e.target.value) : 0)}
+                  />
+                </>
+              );
+            }}
+          />
+          <form.Field
+            name="rows"
+            children={(field) => {
+              return (
+                <>
+                  <label htmlFor={field.name}>Rows:</label>
+                  <input
+                    className="border border-slate-800 rounded"
+                    id={field.name}
+                    name={field.name}
+                    value={field.state.value}
+                    onBlur={field.handleBlur}
+                    onChange={(e) => field.handleChange(e.target.value ? parseInt(e.target.value) : 0)}
                   />
                 </>
               );
@@ -102,4 +126,4 @@ const CreateProductForm: FC = () => {
   );
 };
 
-export default CreateProductForm;
+export default CreateOrganizerForm;

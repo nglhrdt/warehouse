@@ -1,10 +1,12 @@
 import { Router } from 'express';
 import healthCheck from './health-check';
-import products from './product';
+import product from './product';
+import organizer from './organizer';
 
 const router = Router();
 
 router.use('/health', healthCheck);
-router.use('/products', products);
+router.use('/product', product);
+router.use('/organizer', organizer);
 
 export default router;

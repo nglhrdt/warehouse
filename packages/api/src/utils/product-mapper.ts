@@ -1,7 +1,7 @@
 import { ProductDTO } from 'api';
 import Product from '../models/product';
 
-function mapProduct(product: Product): ProductDTO {
+function toDTO(product: Product): ProductDTO {
   return {
     id: product._id.toString(),
     name: product.name,
@@ -9,4 +9,4 @@ function mapProduct(product: Product): ProductDTO {
   };
 }
 
-export default mapProduct;
+export default toDTO;

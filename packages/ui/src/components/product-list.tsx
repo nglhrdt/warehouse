@@ -4,7 +4,7 @@ import { FC } from 'react';
 import ProductListItem from './product-list-item';
 
 const ProductList: FC = () => {
-  const { data: products } = useQuery(queries.products.list);
+  const { data: products } = useQuery(queries.product.list);
 
   return (
     <div className="border border-slate-800 rounded">
