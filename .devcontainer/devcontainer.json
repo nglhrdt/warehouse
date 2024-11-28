@@ -20,7 +20,8 @@
 				"mongodb.mongodb-vscode",
 				"bradlc.vscode-tailwindcss",
 				"dbaeumer.vscode-eslint",
-				"esbenp.prettier-vscode"
+				"esbenp.prettier-vscode",
+				"bierner.markdown-mermaid"
 			]
 		}
 	},
