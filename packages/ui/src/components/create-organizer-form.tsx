@@ -3,6 +3,7 @@ import { useForm } from '@tanstack/react-form';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { CreateOrganizerDTO } from 'api';
 import { FC } from 'react';
+import { Input } from './ui/input';
 
 const CreateOrganizerForm: FC = () => {
   const queryClient = useQueryClient();
@@ -51,8 +52,7 @@ const CreateOrganizerForm: FC = () => {
                   >
                     Organizer name:
                   </label>
-                  <input
-                    className="border border-slate-800 rounded"
+                  <Input
                     id={field.name}
                     name={field.name}
                     value={field.state.value}
@@ -69,8 +69,7 @@ const CreateOrganizerForm: FC = () => {
               return (
                 <>
                   <label htmlFor={field.name}>Columns:</label>
-                  <input
-                    className="border border-slate-800 rounded"
+                  <Input
                     id={field.name}
                     name={field.name}
                     value={field.state.value}
@@ -87,8 +86,7 @@ const CreateOrganizerForm: FC = () => {
               return (
                 <>
                   <label htmlFor={field.name}>Rows:</label>
-                  <input
-                    className="border border-slate-800 rounded"
+                  <Input
                     id={field.name}
                     name={field.name}
                     value={field.state.value}

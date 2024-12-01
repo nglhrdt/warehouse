@@ -3,6 +3,7 @@ import { useForm } from '@tanstack/react-form';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { CreateProductDTO } from 'api';
 import { FC } from 'react';
+import { Input } from './ui/input';
 
 const CreateProductForm: FC = () => {
   const queryClient = useQueryClient();
@@ -45,8 +46,7 @@ const CreateProductForm: FC = () => {
               return (
                 <>
                   <label htmlFor={field.name} className='whitespace-nowrap'>Product name:</label>
-                  <input
-                    className="border border-slate-800 rounded"
+                  <Input
                     id={field.name}
                     name={field.name}
                     value={field.state.value}
@@ -63,8 +63,7 @@ const CreateProductForm: FC = () => {
               return (
                 <>
                   <label htmlFor={field.name}>Product url:</label>
-                  <input
-                    className="border border-slate-800 rounded"
+                  <Input
                     id={field.name}
                     name={field.name}
                     value={field.state.value}
