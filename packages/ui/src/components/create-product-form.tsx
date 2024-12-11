@@ -4,6 +4,8 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { CreateProductDTO } from 'api';
 import { FC } from 'react';
 import { Input } from './ui/input';
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from './ui/card';
+import { Button } from './ui/button';
 
 const CreateProductForm: FC = () => {
   const queryClient = useQueryClient();
@@ -29,17 +31,19 @@ const CreateProductForm: FC = () => {
   });
 
   return (
-    <div className="border border-slate-800 rounded p-4">
-      <h1 className="font-bold text-lg">Create Product</h1>
+    <Card>
       <form
         onSubmit={(e) => {
           e.preventDefault();
           e.stopPropagation();
           form.handleSubmit();
         }}
-        className="flex flex-col gap-4"
       >
-        <div className='grid grid-cols-[auto_1fr]'>
+        <CardHeader>
+          <CardTitle>Create Product</CardTitle>
+          <CardDescription>Create a new Product</CardDescription>
+        </CardHeader>
+        <CardContent className='grid grid-cols-[auto_1fr] gap-4 items-center'>
           <form.Field
             name="name"
             children={(field) => {
@@ -74,30 +78,20 @@ const CreateProductForm: FC = () => {
               );
             }}
           />
-        </div>
-        <form.Subscribe
-          selector={(state) => [state.canSubmit, state.isSubmitting]}
-          children={([canSubmit, isSubmitting]) => (
-            <div className="flex gap-4 justify-end">
-              <button
-                className="py-1 px-2 bg-slate-800 text-white rounded"
-                type="submit"
-                disabled={!canSubmit}
-              >
-                {isSubmitting ? '...' : 'Submit'}
-              </button>
-              <button
-                className="py-1 px-2 bg-slate-800 text-white rounded"
-                type="reset"
-                onClick={() => form.reset()}
-              >
-                Reset
-              </button>
-            </div>
-          )}
-        />
+        </CardContent>
+        <CardFooter className="flex gap-4 justify-end">
+          <form.Subscribe
+            selector={(state) => [state.canSubmit, state.isSubmitting]}
+            children={([canSubmit, isSubmitting]) => (
+              <>
+                <Button variant="destructive" type="reset" onClick={() => form.reset()}>Reset</Button>
+                <Button variant="secondary" type="submit" disabled={!canSubmit}>{isSubmitting ? '...' : 'Create'}</Button>
+              </>
+            )}
+          />
+        </CardFooter>
       </form>
-    </div>
+    </Card>
   );
 };
 

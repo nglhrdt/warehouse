@@ -1,8 +1,10 @@
 import api from '@/api';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { OrganizerDTO } from 'api';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { AddProductToOrganizerDTO, OrganizerDTO } from 'api';
 import React, { useCallback } from 'react';
 import { LuTrash } from 'react-icons/lu';
+import { Button } from './ui/button';
+import { queries } from '@/queries';
 
 interface OrganizerListItemProps {
   organizer: OrganizerDTO;
@@ -10,6 +12,10 @@ interface OrganizerListItemProps {
 
 const OrganizerListItem: React.FC<OrganizerListItemProps> = ({ organizer }) => {
   const deleteMutation = useMutation({ mutationFn: () => api.deleteOrganizer(organizer.id) });
+  const addProductMutation = useMutation({ mutationFn: (data: AddProductToOrganizerDTO) => api.addProductToOrganizer(data) });
+
+  const { data } = useQuery(queries.product.list);
+
   const queryClient = useQueryClient();
 
   const deleteOrganizer = useCallback(
@@ -19,12 +25,20 @@ const OrganizerListItem: React.FC<OrganizerListItemProps> = ({ organizer }) => {
 
   const { columns, rows } = organizer;
 
+  function handleAddProduct(): void {
+    if (data?.[0]) {
+      addProductMutation
+        .mutateAsync({ organizerId: organizer.id, productId: data[0].id, column: 1, row: 1, quantity: 1 })
+        .then(() => queryClient.invalidateQueries({ queryKey: ['organizer'] }));
+    }
+  }
+
   return (
     <div
       className="p-4 border border-slate-800 rounded"
       key={organizer.id}
     >
-      <div className="flex justify-between items-center">
+      <div className="flex justify-between items-center mb-4">
         <div className="flex gap-4">
           {organizer.name} cols: {columns} rows: {rows}
         </div>
@@ -43,7 +57,7 @@ const OrganizerListItem: React.FC<OrganizerListItemProps> = ({ organizer }) => {
               key={`${rowIndex}-${colIndex}`}
               className="border border-gray-300 p-2"
             >
-              {`Row ${rowIndex + 1}, Col ${colIndex + 1}`}
+              <Button variant="outline" onClick={handleAddProduct}>Add</Button>
             </div>
           )),
         )}

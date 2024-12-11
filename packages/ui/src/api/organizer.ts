@@ -1,4 +1,4 @@
-import { CreateOrganizerDTO, OrganizerDTO } from 'api';
+import { AddProductToOrganizerDTO, CreateOrganizerDTO, OrganizerDTO } from 'api';
 
 const baseUrl = 'http://localhost:5000/api/v1';
 const organizerUrl = `${baseUrl}/organizer`;
@@ -23,7 +23,15 @@ const deleteOrganizer = (id: string): Promise<void> => {
   }).then((res) => res.json());
 };
 
+const addProductToOrganizer = (data: AddProductToOrganizerDTO): Promise<void> => {
+  return fetch(`${organizerUrl}/${data.organizerId}/product/${data.productId}`, {
+    method: 'POST',
+    body: JSON.stringify(data),
+  }).then((res) => res.json());
+};
+
 export default {
+  addProductToOrganizer,
   createOrganizer,
   deleteOrganizer,
   getAllOrganizers,
