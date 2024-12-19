@@ -1,9 +1,9 @@
 import { createQueryKeys } from '@lukemorales/query-key-factory';
 import api from '../api';
 
-export const organizer = createQueryKeys('organizer', {
+export const storageUnit = createQueryKeys('storageUnit', {
   list: {
     queryKey: null,
-    queryFn: () => api.getAllOrganizers(),
+    queryFn: () => api.getAllStorageUnits(),
   },
 });

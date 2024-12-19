@@ -1,7 +1,7 @@
-import CreateOrganizerForm from './components/create-organizer-form';
+import CreateStorageUnitForm from './components/create-storage-unit-form';
 import CreateProductForm from './components/create-product-form';
 import Layout from './components/layout';
-import OrganizerList from './components/oraganizer-list';
+import StorageUnitList from './components/storage-unit-list';
 import ProductList from './components/product-list';
 
 function App() {
@@ -13,8 +13,8 @@ function App() {
           <ProductList />
         </div>
         <div className="flex flex-1 flex-col gap-4">
-          <CreateOrganizerForm />
-          <OrganizerList />
+          <CreateStorageUnitForm />
+          <StorageUnitList />
         </div>
       </div>
     </Layout>

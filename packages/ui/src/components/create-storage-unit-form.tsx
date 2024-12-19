@@ -1,33 +1,33 @@
 import api from '@/api';
 import { useForm } from '@tanstack/react-form';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { CreateOrganizerDTO } from 'api';
+import { CreateStorageUnitDTO } from 'api';
 import { FC } from 'react';
-import { Input } from './ui/input';
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from './ui/card';
 import { Button } from './ui/button';
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from './ui/card';
+import { Input } from './ui/input';
 
-const CreateOrganizerForm: FC = () => {
+const CreateStorageUnitForm: FC = () => {
   const queryClient = useQueryClient();
 
-  const createOrganizerMutation = useMutation({
-    mutationFn: async (value: CreateOrganizerDTO) => {
-      return api.createOrganizer(value);
+  const createStorageUnitMutation = useMutation({
+    mutationFn: async (value: CreateStorageUnitDTO) => {
+      return api.createStorageUnit(value);
     },
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['organizer'] });
+      queryClient.invalidateQueries({ queryKey: ['storageUnit'] });
       form.reset();
     },
   });
 
-  const form = useForm<CreateOrganizerDTO>({
+  const form = useForm<CreateStorageUnitDTO>({
     defaultValues: {
       name: '',
-      columns: 0,
-      rows: 0,
+      columns: 1,
+      rows: 1,
     },
     onSubmit: async ({ value }) => {
-      await createOrganizerMutation.mutateAsync(value);
+      await createStorageUnitMutation.mutateAsync(value);
     },
   });
 
@@ -41,8 +41,8 @@ const CreateOrganizerForm: FC = () => {
         }}
       >
         <CardHeader>
-          <CardTitle>Create Organizer</CardTitle>
-          <CardDescription>Create a new Organizer</CardDescription>
+          <CardTitle>Create Storage Unit</CardTitle>
+          <CardDescription>Create a new Storage Unit</CardDescription>
         </CardHeader>
         <CardContent className="grid grid-cols-[auto_1fr] gap-4 items-center">
           <form.Field
@@ -118,4 +118,4 @@ const CreateOrganizerForm: FC = () => {
   );
 };
 
-export default CreateOrganizerForm;
+export default CreateStorageUnitForm;

@@ -1,10 +1,10 @@
 import health from './health';
-import organizer from './organizer';
+import storageUnit from './storage-unit';
 import product from './product';
 
 const api = {
   ...health,
-  ...organizer,
+  ...storageUnit,
   ...product,
 };
 

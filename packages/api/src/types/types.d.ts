@@ -15,32 +15,16 @@ declare module 'api' {
     url?: string;
   };
 
-  export type CreateOrganizerDTO = {
+  export type CreateStorageUnitDTO = {
     columns: number;
     rows: number;
     name: string;
   };
 
-  export type OorganizerProductDTO = {
-    product: ProductDTO;
-    column: number;
-    row: number;
-    quantity: number;
-  };
-
-  export type OrganizerDTO = {
+  export type StorageUnitDTO = {
     id: string;
     columns: number;
     rows: number;
     name: string;
-    products: OorganizerProductDTO[];
-  };
-
-  export type AddProductToOrganizerDTO = {
-    organizerId: string;
-    productId: string;
-    column: number;
-    row: number;
-    quantity: number;
   };
 }
