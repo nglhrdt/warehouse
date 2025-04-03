@@ -1,0 +1,25 @@
+{
+  "name": "warehouse",
+  "version": "1.0.0",
+  "main": "src/index.ts",
+  "author": "Simon Engelhardt <smn@nglhrdt.de>",
+  "license": "MIT",
+  "type": "module",
+  "scripts": {
+    "start": "node --experimental-transform-types src/index.ts",
+    "build": "tsc",
+    "test": "jest --passWithNoTests",
+    "lint": "eslint . --ext .ts",
+    "format": "prettier --write ."
+  },
+  "dependencies": {
+    "dotenv": "^16.4.7",
+    "express": "^5.1.0",
+    "mongodb": "^6.15.0"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.1",
+    "@types/node": "^22.13.14",
+    "typescript": "^5.8.2"
+  }
+}
