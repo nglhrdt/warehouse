@@ -1,0 +1,41 @@
+version: "3.9"
+
+services:
+  traefik:
+    image: traefik:v2.10
+    command:
+      - "--api.insecure=true"
+      - "--providers.docker=true"
+      - "--entrypoints.websecure.address=:443"
+      - "--certificatesresolvers.myresolver.acme.tlschallenge=true"
+      - "--certificatesresolvers.myresolver.acme.email=smn@nglhrdt.de"
+      - "--certificatesresolvers.myresolver.acme.storage=/letsencrypt/acme.json"
+    ports:
+      - "443:443"
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock:ro"
+      - "./traefik_data:/letsencrypt"
+    labels:
+      - "traefik.http.routers.api.rule=Host(`api.devilsoft.de`)"
+      - "traefik.http.routers.api.entrypoints=websecure"
+      - "traefik.http.routers.api.tls.certresolver=myresolver"
+    restart: always
+
+  warehouse-api:
+    image: your-warehouse-api-image:latest
+    environment:
+      - MONGO_URI=${MONGO_URI}
+    labels:
+      - "traefik.http.services.api.loadbalancer.server.port=3000"
+      - "traefik.http.routers.api.service=api"
+    depends_on:
+      - mongodb
+    restart: always
+
+  mongodb:
+    image: mongo:6.0
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=${MONGO_INITDB_ROOT_USERNAME}
+      - MONGO_INITDB_ROOT_PASSWORD=${MONGO_INITDB_ROOT_PASSWORD}
+      - MONGO_INITDB_DATABASE=${MONGO_INITDB_DATABASE}
+    restart: always
