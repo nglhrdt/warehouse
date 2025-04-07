@@ -22,7 +22,7 @@ services:
     restart: always
 
   warehouse-api:
-    image: your-warehouse-api-image:latest
+    image: ghcr.io/nglhrdt/nglhrdt/warehouse:latest
     environment:
       - MONGO_URI=${MONGO_URI}
     labels:
