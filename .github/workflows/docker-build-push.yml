@@ -39,6 +39,8 @@ jobs:
 
       # Make the Docker image public
       - name: Make Docker image public
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           IMAGE_NAME=ghcr.io/${{ github.repository_owner }}/${{ github.repository }}
           gh api --method PATCH \
