@@ -1,36 +1,32 @@
-import { Router } from "express";
+import { type RequestHandler } from "express";
 import ItemsService from "../services/itemsService.ts";
 
-const router = Router();
-
-router.get("/", async (req, res) => {
+export const getItems: RequestHandler = async (req, res) => {
   const items = await ItemsService.getAllItems();
   res.json(items);
-});
+};
 
-router.get("/:id", (req, res) => {
+export const getItemByID: RequestHandler = (req, res) => {
   const id = req.params.id;
   const item = ItemsService.getItemById(id);
   res.json(item);
-});
+};
 
-router.post("/", (req, res) => {
+export const createItem: RequestHandler = (req, res) => {
   const item = req.body;
   const createdItem = ItemsService.createItem(item);
   res.json(createdItem);
-});
+};
 
-router.put("/:id", (req, res) => {
+export const updateItem: RequestHandler = (req, res) => {
   const id = req.params.id;
   const item = req.body;
   const updatedItem = ItemsService.updateItem(id, item);
   res.json(updatedItem);
-});
+};
 
-router.delete("/:id", (req, res) => {
+export const deleteItem: RequestHandler = (req, res) => {
   const id = req.params.id;
   const result = ItemsService.deleteItem(id);
   res.json(result);
-});
-
-export default router;
+};

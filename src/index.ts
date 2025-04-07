@@ -1,5 +1,5 @@
 import express from "express";
-import v1Routes from "./v1/index.ts";
+import v1Routes from "./v1/routes/index.ts";
 
 async function main() {
   try {
