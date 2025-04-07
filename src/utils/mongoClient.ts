@@ -8,7 +8,8 @@ class MongoClientSingleton {
 
   static getInstance(): MongoClient {
     if (!MongoClientSingleton.instance) {
-      MongoClientSingleton.instance = new MongoClient(config.dbConnString);
+      const connectionString = `mongodb://${config.dbUser}:${config.dbPassword}@${config.dbHost}:${config.dbPort}/${config.dbName}`;
+      MongoClientSingleton.instance = new MongoClient(connectionString);
     }
     return MongoClientSingleton.instance;
   }
