@@ -36,15 +36,3 @@ jobs:
           TAG=${{ github.ref_name }}
           docker push $IMAGE_NAME:latest
           docker push $IMAGE_NAME:$TAG
-
-      # Make the Docker image public
-      - name: Make Docker image public
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          IMAGE_NAME=ghcr.io/${{ github.repository_owner }}/${{ github.repository }}
-          gh api --method PATCH \
-            -H "Authorization: Bearer ${{ secrets.GHCR_PAT }}" \
-            -H "Accept: application/vnd.github.v3+json" \
-            /user/packages/container/${{ github.repository }}/visibility \
-            -f visibility=public
