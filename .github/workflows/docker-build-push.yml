@@ -25,14 +25,14 @@ jobs:
       # Build the Docker image with version tagging
       - name: Build Docker image with tags
         run: |
-          IMAGE_NAME=ghcr.io/${{ github.repository_owner }}/${{ github.repository }}
+          IMAGE_NAME=ghcr.io/${{ github.repository }}
           TAG=${{ github.ref_name }}
           docker build -t $IMAGE_NAME:latest -t $IMAGE_NAME:$TAG .
 
       # Push the Docker image with tags
       - name: Push Docker image with tags
         run: |
-          IMAGE_NAME=ghcr.io/${{ github.repository_owner }}/${{ github.repository }}
+          IMAGE_NAME=ghcr.io/${{ github.repository }}
           TAG=${{ github.ref_name }}
           docker push $IMAGE_NAME:latest
           docker push $IMAGE_NAME:$TAG
